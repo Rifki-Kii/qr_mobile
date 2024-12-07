@@ -12,6 +12,7 @@ class LoginPage extends StatelessWidget {
 
     final usernameController = TextEditingController();
     final passwordController = TextEditingController();
+    bool isPasswordVisible = false;
 
     return Scaffold(
       backgroundColor: AppColor.whiteColor,
@@ -54,7 +55,7 @@ class LoginPage extends StatelessWidget {
                   },
                 ),
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 13),
               Container(
                 decoration: BoxDecoration(
                   color: const Color.fromARGB(255, 255, 255, 255),
@@ -68,16 +69,24 @@ class LoginPage extends StatelessWidget {
                 ),
                 child: TextFormField(
                   controller: passwordController,
-
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                     labelText: 'Password',
-                    border: OutlineInputBorder(),
+                    border: const OutlineInputBorder(),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        isPasswordVisible ? Icons.visibility : Icons.visibility_off,
+                      ),
+                      onPressed: () {
+                        (() {
+                          isPasswordVisible = !isPasswordVisible;
+                        });
+                      },
+                    ),
                   ),
-
-                  obscureText: true, // Untuk menyembunyikan teks saat mengetik password
+                  obscureText: !isPasswordVisible, // Atur visibilitas password
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter your password';
+                      return 'Password tidak boleh kosong';
                     }
                     return null;
                   },
@@ -87,14 +96,14 @@ class LoginPage extends StatelessWidget {
               ElevatedButton(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 10, 155, 39),
+                  backgroundColor: const Color.fromARGB(255, 16, 182, 49),
                   minimumSize: Size(screenWidth * 0.8, 50),
                 ),
                 child: const Text(
-                  'Login', // Teks pada tombol
+                  'Login',
                   style: TextStyle(
-                    fontSize: 16, // Ukuran font
-                    color: Colors.white, // Warna teks
+                    fontSize: 16,
+                    color: Colors.white,
                   ),
                 ),
               ),
